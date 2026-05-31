@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     end
     driver.trigger.before :all do |trigger|
       trigger.ruby do |env, machine|
-        ip = `tart ip --resolver=agent worker 2>/dev/null`.strip
+        ip = `tart ip --resolver=agent driver 2>/dev/null`.strip
         machine.config.ssh.host = ip unless ip.empty?
       end
     end
