@@ -1,6 +1,6 @@
-# cloudstack-for-mac
+# Nested VMs Vagrant 
 
-Getting Cloudstack up and running on a Mac with Vagrant, Ansible, [Tart](https://tart.run) and [Nested Virtualization](https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/isnestedvirtualizationsupported).
+Getting Nested VMs up and running on a Mac with Vagrant, Ansible, [Tart](https://tart.run) and [Nested Virtualization](https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/isnestedvirtualizationsupported).
 
 We're using [Vagrant Tart](https://letiemble.github.io/vagrant-tart/) as the plugin
 for vagrant.
@@ -12,16 +12,24 @@ for vagrant.
 make install
 
 # Start up machines
-make up
+ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
+    ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    make up
 
 # If you want to update the ansible deployment
-make deploy
+ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
+    ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    make deploy
 
 # Stopping VMs
-make halt
+ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
+    ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    make halt
 
 # Destroying VMs
-make destroy
+ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
+    ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    make destroy
 ```
 
 ## How does it work
