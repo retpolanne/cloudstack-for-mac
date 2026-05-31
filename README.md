@@ -35,3 +35,11 @@ provided by Apple. This framework allows for nested virtualization on
 newer macOS versions.
 
 You can always edit Vagrantfile for what fits you best.
+
+### Networking between VMs
+
+We use `--net-bridged` to connect using the `Wi-Fi` interface. Please change to
+`en0` or `en1` to use whichever interface you may be using.
+
+The first VM can resolve by simply using `arp`, the second one resolves by using
+a trigger with the `agent` resolver, as per [this issue](https://github.com/cirruslabs/tart/issues/1020#issuecomment-3152128883).
