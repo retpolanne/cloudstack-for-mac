@@ -1,0 +1,6 @@
+---
+- name: Start chrony
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: chrony

@@ -1,0 +1,19 @@
+---
+- name: Add Cloudstack APT key
+  ansible.builtin.apt_key:
+    url: https://download.cloudstack.org/release.asc
+    state: present
+
+- name: Add Cloudstack APT repo
+  ansible.builtin.apt_repository:
+    repo: deb https://download.cloudstack.org/ubuntu noble 4.22
+    state: present
+
+- name: Install common packages
+  ansible.builtin.apt:
+    pkg:
+      - chrony
+    state: present
+    update_cache: true
+  notify:
+    - Start chrony

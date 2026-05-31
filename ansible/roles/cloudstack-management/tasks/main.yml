@@ -1,0 +1,7 @@
+---
+- name: Install cloudstack-management
+  ansible.builtin.apt:
+    pkg:
+      - cloudstack-management
+    state: present
+    update_cache: true

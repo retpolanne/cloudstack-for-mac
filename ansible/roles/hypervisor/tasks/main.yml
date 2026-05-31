@@ -1,0 +1,17 @@
+---
+- name: Verify block device is present
+  ansible.builtin.debug:
+    msg: "Device sdb exists and is ready."
+  when: ansible_devices.kvm is defined
+
+- name: Fail if the required device is missing
+  ansible.builtin.fail:
+    msg: "Critical error: Device sdb was not found on this host!"
+  when: ansible_devices.kvm is undefined
+
+- name: Install cloudstack-agent
+  ansible.builtin.apt:
+    pkg:
+      - cloudstack-agent
+    state: present
+    update_cache: true

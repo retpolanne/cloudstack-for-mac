@@ -1,0 +1,9 @@
+---
+- name: Install mysql
+  ansible.builtin.apt:
+    pkg:
+      - mysql-server
+    state: present
+    update_cache: true
+  notify:
+    - Start mysql-server

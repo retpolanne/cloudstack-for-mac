@@ -1,0 +1,4 @@
+*.qcow
+.DS_Store
+*.iso
+.vagrant
