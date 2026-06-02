@@ -12,23 +12,28 @@ for vagrant.
 make install
 
 # Start up machines
+# Use ANSIBLE_ASK_VAULT_PASS if you want to ask for vault password
 ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
     ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    ANSIBLE_ASK_VAULT_PASS=true \
     make up
 
 # If you want to update the ansible deployment
 ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
     ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    ANSIBLE_ASK_VAULT_PASS=true \
     make deploy
 
 # Stopping VMs
 ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
     ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    ANSIBLE_ASK_VAULT_PASS=true \
     make halt
 
 # Destroying VMs
 ANSIBLE_PLAYBOOK_DRIVER=/path/to/ansible/driver.yml \
     ANSIBLE_PLAYBOOK_WORKER=/path/to/ansible/worker.yml \
+    ANSIBLE_ASK_VAULT_PASS=true \
     make destroy
 ```
 

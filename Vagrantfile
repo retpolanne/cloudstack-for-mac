@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
     driver.vm.provision "shell", inline: "sudo apt update && sudo apt install -y avahi-daemon avahi-utils libnss-mdns"
     driver.vm.provision "ansible" do |ansible|
       ansible.playbook = ENV['ANSIBLE_PLAYBOOK_DRIVER']
+      ansible.ask_vault_pass = ENV['ANSIBLE_ASK_VAULT_PASS'] || false
     end
   end
 
@@ -49,6 +50,7 @@ Vagrant.configure("2") do |config|
     worker.vm.provision "shell", inline: "ls /dev/kvm"
     worker.vm.provision "ansible" do |ansible|
       ansible.playbook = ENV['ANSIBLE_PLAYBOOK_WORKER']
+      ansible.ask_vault_pass = ENV['ANSIBLE_ASK_VAULT_PASS'] || false
     end
   end
 
