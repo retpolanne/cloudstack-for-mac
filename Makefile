@@ -3,10 +3,10 @@ install:
 	vagrant plugin install vagrant-tart
 
 up:
-	vagrant up
+	vagrant up --no-parallel
 
 deploy:
-	vagrant provision
+	vagrant provision --no-parallel
 
 halt:
 	vagrant halt
