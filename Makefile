@@ -3,13 +3,15 @@ install:
 	vagrant plugin install vagrant-tart
 
 up:
-	vagrant up --no-parallel
+	vagrant up driver --no-provision
+	vagrant up worker --no-provision
 
 deploy:
-	vagrant provision --no-parallel
+	vagrant provision
 
 halt:
 	vagrant halt
 
 destroy:
-	vagrant destroy -f
+	vagrant destroy -f driver
+	vagrant destroy -f worker
