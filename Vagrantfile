@@ -8,13 +8,6 @@ Vagrant.configure("2") do |config|
       tart.disk = 25
       tart.cpus = 4
       tart.memory = 8192
-      tart.extra_run_args = ["--net-bridged", "Wi-Fi"]
-    end
-    driver.trigger.before :all do |trigger|
-      trigger.ruby do |env, machine|
-        ip = `tart ip --resolver=agent driver 2>/dev/null`.strip
-        machine.config.ssh.host = ip unless ip.empty?
-      end
     end
     driver.vm.provision "shell", inline: "echo Hello driver"
     driver.vm.provision "shell", inline: "sudo hostnamectl set-hostname driver"
@@ -31,16 +24,10 @@ Vagrant.configure("2") do |config|
     worker.vm.provider "tart" do |tart|
       tart.image = "ghcr.io/cirruslabs/ubuntu:24.04"
       tart.name = "worker"
-      tart.extra_run_args = ["--nested", "--net-bridged", "Wi-Fi"]
+      tart.extra_run_args = ["--nested"]
       tart.disk = 25
       tart.cpus = 4
       tart.memory = 8192
-    end
-    worker.trigger.before :all do |trigger|
-      trigger.ruby do |env, machine|
-        ip = `tart ip --resolver=agent worker 2>/dev/null`.strip
-        machine.config.ssh.host = ip unless ip.empty?
-      end
     end
     worker.vm.provision "shell", inline: "echo Hello worker"
     worker.vm.provision "shell", inline: "sudo systemctl stop unattended-upgrades"
