@@ -3,6 +3,8 @@ install:
 	vagrant plugin install vagrant-tart
 
 up:
+	echo "Caching sudo for softnet"
+	sudo ls 
 	vagrant up driver --no-provision
 	vagrant up worker --no-provision
 

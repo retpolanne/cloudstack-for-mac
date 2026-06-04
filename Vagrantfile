@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "driver" do |driver|
     driver.vm.provider "tart" do |tart|
       tart.image = "ghcr.io/cirruslabs/ubuntu:24.04"
+      tart.extra_run_args = ["--net-softnet", "--net-softnet-allow", "0.0.0.0/0"]
       tart.name = "driver"
       tart.disk = 25
       tart.cpus = 4
@@ -24,7 +25,7 @@ Vagrant.configure("2") do |config|
     worker.vm.provider "tart" do |tart|
       tart.image = "ghcr.io/cirruslabs/ubuntu:24.04"
       tart.name = "worker"
-      tart.extra_run_args = ["--nested"]
+      tart.extra_run_args = ["--nested", "--net-softnet", "--net-softnet-allow", "0.0.0.0/0"]
       tart.disk = 25
       tart.cpus = 4
       tart.memory = 8192
