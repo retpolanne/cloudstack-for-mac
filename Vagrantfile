@@ -12,8 +12,9 @@ Vagrant.configure("2") do |config|
     end
     driver.vm.provision "shell", inline: "echo Hello driver"
     driver.vm.provision "shell", inline: "sudo hostnamectl set-hostname driver"
-    driver.vm.provision "shell", inline: "sudo systemctl stop unattended-upgrades"
+    driver.vm.provision "shell", inline: "sudo systemctl stop unattended-upgrades || true"
     driver.vm.provision "shell", inline: "sudo systemctl disable --now unattended-upgrades apt-daily.timer apt-daily-upgrade.timer"
+    driver.vm.provision "shell", inline: "sudo apt remove -y unattended-upgrades"
     driver.vm.provision "shell", inline: "sudo apt update && sudo apt install -y avahi-daemon avahi-utils libnss-mdns"
     driver.vm.provision "ansible" do |ansible|
       ansible.playbook = ENV['ANSIBLE_PLAYBOOK_DRIVER']
@@ -31,8 +32,9 @@ Vagrant.configure("2") do |config|
       tart.memory = 8192
     end
     worker.vm.provision "shell", inline: "echo Hello worker"
-    worker.vm.provision "shell", inline: "sudo systemctl stop unattended-upgrades"
+    worker.vm.provision "shell", inline: "sudo systemctl stop unattended-upgrades || true"
     worker.vm.provision "shell", inline: "sudo systemctl disable --now unattended-upgrades apt-daily.timer apt-daily-upgrade.timer"
+    worker.vm.provision "shell", inline: "sudo apt remove -y unattended-upgrades"
     worker.vm.provision "shell", inline: "sudo apt update && sudo apt install -y avahi-daemon avahi-utils libnss-mdns"
     worker.vm.provision "shell", inline: "sudo hostnamectl set-hostname worker"
     worker.vm.provision "shell", inline: "ls /dev/kvm"
